@@ -55,19 +55,19 @@ else:
         st.rerun()
 time.sleep(1)
 if st.session_state.logged_in:
-     try:
+    try:
         conn = st.connection('gsheets', type=GSheetsConnection)
         exist = conn.read(worksheet= 'CONTRIBUTIONS', usecols=list(range(4)),ttl=5)
         dfp = exist.dropna(how='all')
-     except:
+    except:
          st.write("POOR NETWORK, COULDN'T CONNECT TO DATABASE")
          st.write('REFRESH PAGE TO START AGAIN')
          st.stop()
-     try:
+    try:
         conn = st.connection('gsheets', type=GSheetsConnection)
         exista = conn.read(worksheet= 'EXPENSES', usecols=list(range(4)),ttl=5)
         dfe = exista.dropna(how='all')
-     except:
+    except:
          st.write("POOR NETWORK, COULDN'T CONNECT TO DATABASE")
          st.write('REFRESH PAGE TO START AGAIN')
          st.stop()
