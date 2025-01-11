@@ -5,11 +5,12 @@ import datetime as dt
 import plotly.express as px
 import time
 
+st.cache_data.clear()
+st.cache_resource.clear()
+
 st.set_page_config(
     'COMPETENCE YARD TRACKER'
 )
-
-
 file = r"MEMBERS.csv"
 df = pd.read_csv(file)
 df = df[df['MEMBER']!='ADMIN'].copy()
@@ -54,13 +55,25 @@ else:
         st.rerun()
 time.sleep(1)
 if st.session_state.logged_in:
-    file2 = r"C:\Users\dluminsa\Desktop\AA\PAYMENTS.xlsx"
-    dfp = pd.read_excel(file2, sheet_name='CONTRIBUTION')
+     try:
+        conn = st.connection('gsheets', type=GSheetsConnection)
+        exist = conn.read(worksheet= 'CONTRIBUTIONS', usecols=list(range(4)),ttl=5)
+        dfp = exist.dropna(how='all')
+     except:
+         st.write("POOR NETWORK, COULDN'T CONNECT TO DATABASE")
+         st.write('REFRESH PAGE TO START AGAIN')
+         st.stop()
+     try:
+        conn = st.connection('gsheets', type=GSheetsConnection)
+        exista = conn.read(worksheet= 'EXPENSES', usecols=list(range(4)),ttl=5)
+        dfe = exista.dropna(how='all')
+     except:
+         st.write("POOR NETWORK, COULDN'T CONNECT TO DATABASE")
+         st.write('REFRESH PAGE TO START AGAIN')
+         st.stop()
     dfpa = dfp[dfp['DIRECTOR']== director_name].copy()
     tot = dfp['AMOUNT'].sum()
     contribut = dfpa['AMOUNT'].sum()
-
-    dfe = pd.read_excel(file2, sheet_name='EXPENSES')
     dfpaye = dfe.copy()
     exp = dfe['AMOUNT'].sum()
     bal = int(tot) - int(exp)
