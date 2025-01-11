@@ -1,0 +1,11 @@
+openpyxl
+streamlit
+pandas
+numpy
+google-auth
+oauth2client
+gspread
+plotly
+st-gsheets-connection
+git+https://github.com/streamlit/gsheets-connection
+cython
