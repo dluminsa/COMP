@@ -15,16 +15,27 @@ from oauth2client.service_account import ServiceAccountCredentials
 st.set_page_config(
     'COMPETENCE YARD TRACKER'
 )
-file2 = r"C:\Users\dluminsa\Desktop\AA\PAYMENTS.xlsx"
-dfpaye = pd.read_excel(file2, sheet_name='EXPENSES')
 
-file2 = r"C:\Users\dluminsa\Desktop\AA\PAYMENTS.xlsx"
-dfpay = pd.read_excel(file2, sheet_name='CONTRIBUTION')
+try:
+   conn = st.connection('gsheets', type=GSheetsConnection)
+   exist = conn.read(worksheet= 'CONTRIBUTIONS', usecols=list(range(4)),ttl=5)
+   dfpay = exist.dropna(how='all')
+except:
+   st.write("POOR NETWORK, COULDN'T CONNECT TO DATABASE")
+   st.write('REFRESH PAGE TO START AGAIN')
+   st.stop()
+try:
+   conn = st.connection('gsheets', type=GSheetsConnection)
+   exista = conn.read(worksheet= 'EXPENSES', usecols=list(range(4)),ttl=5)
+   dfpaye = exista.dropna(how='all')
+except:
+   st.write("POOR NETWORK, COULDN'T CONNECT TO DATABASE")
+   st.write('REFRESH PAGE TO START AGAIN')
+   st.stop()
 
 
-file = r"C:\Users\dluminsa\Desktop\AA\MEMBERS.xlsx"
-df = pd.read_excel(file)
-df = pd.read_excel(file)
+file = r"MEMBERS.csv"
+df = pd.read_csv(file)
 dfm = df[df['MEMBER']!='ADMIN'].copy()
 df = df[df['MEMBER']=='ADMIN'].copy()
 members =dfm['MEMBER'].unique()
