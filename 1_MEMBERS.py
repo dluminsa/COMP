@@ -5,16 +5,13 @@ import datetime as dt
 import plotly.express as px
 import time
 
-
-
-
 st.set_page_config(
     'COMPETENCE YARD TRACKER'
 )
 
 
-file = r"C:\Users\dluminsa\Desktop\AA\MEMBERS.xlsx"
-df = pd.read_excel(file)
+file = r"MEMBERS.csv"
+df = pd.read_csv(file)
 df = df[df['MEMBER']!='ADMIN'].copy()
 # Initialize session states
 if 'passw' not in st.session_state:
