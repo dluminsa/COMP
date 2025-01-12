@@ -160,6 +160,7 @@ if st.session_state.logged_in:
     groupd = dfcl.groupby(['MONA', 'TYPE'], as_index=False).sum()
     
     with cola:
+        st.write("**TREND OF THE GROUP'S TOTAL EXPENSES AND CONTRIBUTIONS**")
         fig = px.line(
             groupd,
             x="MONA",
@@ -167,7 +168,6 @@ if st.session_state.logged_in:
             color="TYPE",
             color_discrete_map={"SPENT": "red", "CONTRIBUTION": "blue"},
             markers=True,  # Optional: Add markers to the lines
-            title="TREND THE GROUP'S CONTRIBUTIONS AND EXPENSES"
         )
         fig.update_layout(
         xaxis=dict(title='Month', tickformat='d'),
