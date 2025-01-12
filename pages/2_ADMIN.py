@@ -318,11 +318,11 @@ if st.session_state.logged_in:
                     if submit:
                         sheet1 = spreadsheet.worksheet("CONTRIBUTIONS")
                         rows_to_append = df.values.tolist()
-                        st.write(rows_to_append)
-                        time.sleep(10)
                         sheet1.append_rows(rows_to_append, value_input_option='RAW')
                         time.sleep(2)
                         st.success('SUBMITTED SUCCESSFULLY')
+                        st.cache_data.clear()
+                        st.cache_resource.clear()
                         st.rerun()
                         # st.markdown("""
                         #     <meta http-equiv="refresh" content="0">
