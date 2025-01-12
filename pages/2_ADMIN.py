@@ -45,6 +45,8 @@ if 'passw' not in st.session_state:
     st.session_state.passw = ''
 if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
+if 'restart' not in st.session_state:
+    st.session_state.restart = False
 
 passwords = df['PASSWORD'].unique()
 
@@ -80,6 +82,8 @@ else:
         st.rerun()
 time.sleep(1)
 if st.session_state.logged_in:
+    st.session_state.restart = True
+if st.session_state.restart:    
     secrets = st.secrets["connections"]["gsheets"]
         # Prepare the credentials dictionary
     credentials_info = {
@@ -224,8 +228,6 @@ if st.session_state.logged_in:
                     if submit:
                         sheet1 = spreadsheet.worksheet("EXPENSES")
                         rows_to_append = df.values.tolist()
-                        st.write(rows_to_append)
-                        time.sleep(10)
                         sheet1.append_rows(rows_to_append, value_input_option='RAW')
                         time.sleep(2)
                         st.success('SUBMITTED SUCCESSFULLY')
@@ -249,10 +251,14 @@ if st.session_state.logged_in:
             notpaid = len(notpay)
             if notpaid ==0:
                 st.markdown("<p style='color:purple';>ALL MEMBERS HAVE PAID FOR THIS MONTH</>", unsafe_allow_html=True)
+            elif nopaid ==1:
+                st.markdown(f"<p style='color:green';>{notpaid} MEMBER HAS NOT CONTRIBUTED THIS MONTH</>", unsafe_allow_html=True)
+                with st.expander('**CLICK HERE TO SEE THEM:**'):
+                        st.write(set(notpay))
             else:
-                st.markdown(f"<p style='color:green';>{notpaid} MEMBERS HAVEN'T CONTRIBUTED FOR THIS MONTH</>", unsafe_allow_html=True)
-                st.write('**THEY ARE:**')
-                st.write(set(notpay))
+                st.markdown(f"<p style='color:green';>{notpaid} MEMBERS HAVEN'T CONTRIBUTED THIS MONTH</>", unsafe_allow_html=True)
+                with st.expander('**CLICK HERE TO SEE THEM:**'):
+                        st.write(set(notpay))
             cola, colb, colc = st.columns([1,2,1])
             colb.info('DEPOSIT DETAILS')
            
@@ -323,6 +329,7 @@ if st.session_state.logged_in:
                         st.success('SUBMITTED SUCCESSFULLY')
                         st.cache_data.clear()
                         st.cache_resource.clear()
+                        st.session_state.restart = False
                         st.rerun()
                         # st.markdown("""
                         #     <meta http-equiv="refresh" content="0">
