@@ -61,6 +61,7 @@ if not st.session_state.logged_in:
             input_password = int(password_input)
             if input_password in passwords:
                 st.session_state.logged_in = True
+                st.session_state.restart = True
                 st.session_state.passw = input_password
                 st.success("Login successful!")
                 st.rerun()  # Refresh the app to remove the form after login
@@ -78,8 +79,9 @@ else:
     else:
         st.error("Unable to retrieve your information. Please log in again.")
         st.session_state.logged_in = False
+        st.session_state.restart = False
         st.rerun()
-if not st.session_state.restart:    
+if st.session_state.restart:    
     secrets = st.secrets["connections"]["gsheets"]
         # Prepare the credentials dictionary
     credentials_info = {
@@ -147,7 +149,7 @@ if st.session_state.logged_in:
     else:
         pass
         
-if not st.session_state.restart:
+if st.session_state.restart:
         st.write('LOOG')
         if todo == 'EXPENDITURE':
             st.cache_data.clear()
@@ -329,7 +331,7 @@ if not st.session_state.restart:
                         st.success('SUBMITTED SUCCESSFULLY')
                         st.cache_data.clear()
                         st.cache_resource.clear()
-                        st.session_state.restart = True
+                        st.session_state.restart = False
                         st.rerun()
                         # st.markdown("""
                         #     <meta http-equiv="refresh" content="0">
