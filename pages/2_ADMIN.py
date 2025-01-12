@@ -44,8 +44,6 @@ if 'passw' not in st.session_state:
     st.session_state.passw = ''
 if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
-if 'restart' not in st.session_state:
-    st.session_state.restart = False
 
 passwords = df['PASSWORD'].unique()
 
@@ -61,7 +59,6 @@ if not st.session_state.logged_in:
             input_password = int(password_input)
             if input_password in passwords:
                 st.session_state.logged_in = True
-                st.session_state.restart = True
                 st.session_state.passw = input_password
                 st.success("Login successful!")
                 st.rerun()  # Refresh the app to remove the form after login
@@ -79,9 +76,8 @@ else:
     else:
         st.error("Unable to retrieve your information. Please log in again.")
         st.session_state.logged_in = False
-        st.session_state.restart = False
         st.rerun()
-if st.session_state.restart:    
+if st.session_state.logged_in:
     secrets = st.secrets["connections"]["gsheets"]
         # Prepare the credentials dictionary
     credentials_info = {
@@ -148,11 +144,8 @@ if st.session_state.logged_in:
         st.stop()
     else:
         pass
-        
-if st.session_state.restart:
-        st.write('LOOG')
+if st.session_state.logged_in:
         if todo == 'EXPENDITURE':
-            st.session_state.restart = True
             st.cache_data.clear()
             st.cache_resource.clear()
             #CHECKING MEMBERS WHO HAVEN'T PAID THIS MONTH
@@ -167,9 +160,8 @@ if st.session_state.restart:
                 st.markdown("<p style='color:purple';>NO AMOUNT HAS BEEN SPENT THIS MONTH</>", unsafe_allow_html=True)
             else:
                 st.markdown(f"<p style='color:green';>{spent} Shs. HAS BEEN SPENT THIS MONTH/>", unsafe_allow_html=True)
-            cola, colb, colc = st.columns([1,2,1])
-            colb.info('EXPENDITURE DETAILS')
-           
+            cola, colb = st.columns([1,2])
+            colb.info('IN PUT EXPENDITURE DETAILS')         
             cola,colb = st.columns([2,1])
             cola.write('**HOW MANY ITEMS DO YO WANT TO IN PUT**')
             cola,colb = st.columns([1,2])
@@ -217,7 +209,6 @@ if st.session_state.restart:
                     st.write('**SUMMARY:** crosscheck before submission')
                 if checka ==1:
                     st.markdown(f'**> YOU SPENT {amount} ON {item}**')
-                    submit = st.button('**CLICK HERE TO SUBMIT**')
                 if checka>1:
                     dfu = df[['ITEM', 'AMOUNT']]
                     dfu.index = pd.Index(range(1, len(dfu) + 1))
@@ -227,19 +218,18 @@ if st.session_state.restart:
                         .set_table_styles([{'selector': 'th', 'props': [('font-weight', 'bold'),('color', 'red') ]}])
                         )
                     st.table(styled)
-                    submit = st.button('**CLICK HERE TO SUBMIT**')
-                    if submit:
-                        sheet1 = spreadsheet.worksheet("EXPENSES")
-                        rows_to_append = df.values.tolist()
-                        sheet1.append_rows(rows_to_append, value_input_option='RAW')
-                        time.sleep(2)
-                        st.success('SUBMITTED SUCCESSFULLY')
-                        st.rerun()
-                        # st.markdown("""
-                        #     <meta http-equiv="refresh" content="0">
-                        #         """, unsafe_allow_html=True)
+                submit = st.button('**CLICK HERE TO SUBMIT**')
+                if submit:
+                    sheet1 = spreadsheet.worksheet("EXPENSES")
+                    rows_to_append = df.values.tolist()
+                    sheet1.append_rows(rows_to_append, value_input_option='RAW')
+                    time.sleep(2)
+                    st.success('SUBMITTED SUCCESSFULLY')
+                    st.rerun()
+                    st.markdown("""
+                        <meta http-equiv="refresh" content="0">
+                            """, unsafe_allow_html=True)
         elif todo == "MEMBERS' DEPOSIT":
-            st.session_state.restart = True
             st.cache_data.clear()
             st.cache_resource.clear()
             #CHECKING MEMBERS WHO HAVEN'T PAID THIS MONTH
@@ -263,8 +253,8 @@ if st.session_state.restart:
                 st.markdown(f"<p style='color:green';>{notpaid} MEMBERS HAVEN'T CONTRIBUTED THIS MONTH</>", unsafe_allow_html=True)
                 with st.expander('**CLICK HERE TO SEE THEM:**'):
                         st.write(set(notpay))
-            cola, colb, colc = st.columns([1,2,1])
-            colb.info('DEPOSIT DETAILS')
+            cola, colb = st.columns([1,2])
+            colb.info('IN PUT DEPOSIT DETAILS')
            
             cola,colb = st.columns([2,1])
             cola.write('**FOR HOW MANY MEMBERS ARE YOU DEPOSITING FOR**')
@@ -314,7 +304,8 @@ if st.session_state.restart:
                     st.write('**SUMMARY:** crosscheck before submission')
                 if checka ==1:
                     st.markdown(f'**> YOU ARE DEPOSITING {amount} for {name}**')
-                    submit = st.button('**CLICK HERE TDEPOSTINGO SUBMIT**')
+                else:
+                    pass
                 if checka>1:
                     dfu = df[['DIRECTOR', 'AMOUNT']]
                     dfu.index = pd.Index(range(1, len(dfu) + 1))
@@ -324,20 +315,18 @@ if st.session_state.restart:
                         .set_table_styles([{'selector': 'th', 'props': [('font-weight', 'bold'),('color', 'red') ]}])
                         )
                     st.table(styled)
-                    submit = st.button('**CLICK HERE TO SUBMIT**')
-                    if submit:
-                        sheet1 = spreadsheet.worksheet("CONTRIBUTIONS")
-                        rows_to_append = df.values.tolist()
-                        sheet1.append_rows(rows_to_append, value_input_option='RAW')
-                        time.sleep(2)
-                        st.success('SUBMITTED SUCCESSFULLY')
-                        st.cache_data.clear()
-                        st.cache_resource.clear()
-                        st.session_state.restart = False
-                        st.rerun()
-                        # st.markdown("""
-                        #     <meta http-equiv="refresh" content="0">
-                        #         """, unsafe_allow_html=True)
-         
+                submit = st.button('**CLICK HERE TO SUBMIT**')
+                if submit:
+                    sheet1 = spreadsheet.worksheet("CONTRIBUTIONS")
+                    rows_to_append = df.values.tolist()
+                    sheet1.append_rows(rows_to_append, value_input_option='RAW')
+                    time.sleep(2)
+                    st.success('SUBMITTED SUCCESSFULLY')
+                    st.cache_data.clear()
+                    st.cache_resource.clear()
+                    st.markdown("""
+                        <meta http-equiv="refresh" content="0">
+                            """, unsafe_allow_html=True)
+     
 
 
