@@ -152,6 +152,7 @@ if st.session_state.logged_in:
 if st.session_state.restart:
         st.write('LOOG')
         if todo == 'EXPENDITURE':
+            st.session_state.restart = True
             st.cache_data.clear()
             st.cache_resource.clear()
             #CHECKING MEMBERS WHO HAVEN'T PAID THIS MONTH
@@ -238,6 +239,7 @@ if st.session_state.restart:
                         #     <meta http-equiv="refresh" content="0">
                         #         """, unsafe_allow_html=True)
         elif todo == "MEMBERS' DEPOSIT":
+            st.session_state.restart = True
             st.cache_data.clear()
             st.cache_resource.clear()
             #CHECKING MEMBERS WHO HAVEN'T PAID THIS MONTH
