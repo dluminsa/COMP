@@ -14,7 +14,6 @@ from oauth2client.service_account import ServiceAccountCredentials
 st.set_page_config(
     'COMPETENCE YARD TRACKER'
 )
-
 try:
    conn = st.connection('gsheets', type=GSheetsConnection)
    exist = conn.read(worksheet= 'CONTRIBUTIONS', usecols=list(range(4)),ttl=5)
@@ -82,6 +81,7 @@ else:
         st.rerun()
 if st.session_state.logged_in:
     st.session_state.restart = True
+    
 if st.session_state.restart:    
     secrets = st.secrets["connections"]["gsheets"]
         # Prepare the credentials dictionary
@@ -149,7 +149,9 @@ if st.session_state.logged_in:
         st.stop()
     else:
         pass
+        
 if st.session_state.restart:
+        st.write('LOOG')
         if todo == 'EXPENDITURE':
             st.cache_data.clear()
             st.cache_resource.clear()
