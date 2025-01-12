@@ -80,6 +80,7 @@ else:
         st.rerun()
 time.sleep(1)
 if st.session_state.logged_in:
+    secrets = st.secrets["connections"]["gsheets"]
         # Prepare the credentials dictionary
     credentials_info = {
             "type": secrets["type"],
