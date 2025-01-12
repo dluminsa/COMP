@@ -80,7 +80,6 @@ else:
         st.error("Unable to retrieve your information. Please log in again.")
         st.session_state.logged_in = False
         st.rerun()
-time.sleep(1)
 if st.session_state.logged_in:
     st.session_state.restart = True
 if st.session_state.restart:    
