@@ -222,12 +222,15 @@ if st.session_state.logged_in:
                     if submit:
                         sheet1 = spreadsheet.worksheet("EXPENSES")
                         rows_to_append = df.values.tolist()
+                        st.write(rows_to_append)
+                        time.sleep(10)
                         sheet.append_rows(rows_to_append, value_input_option='RAW')
                         time.sleep(2)
                         st.success('SUBMITTED SUCCESSFULLY')
-                        st.markdown("""
-                            <meta http-equiv="refresh" content="0">
-                                """, unsafe_allow_html=True)
+                        st.rerun()
+                        # st.markdown("""
+                        #     <meta http-equiv="refresh" content="0">
+                        #         """, unsafe_allow_html=True)
         elif todo == "MEMBERS' DEPOSIT":
             st.cache_data.clear()
             st.cache_resource.clear()
@@ -312,12 +315,15 @@ if st.session_state.logged_in:
                     if submit:
                         sheet1 = spreadsheet.worksheet("CONTRIBUTIONS")
                         rows_to_append = df.values.tolist()
+                        st.write(rows_to_append)
+                        time.sleep(10)
                         sheet.append_rows(rows_to_append, value_input_option='RAW')
                         time.sleep(2)
                         st.success('SUBMITTED SUCCESSFULLY')
-                        st.markdown("""
-                            <meta http-equiv="refresh" content="0">
-                                """, unsafe_allow_html=True)
+                        st.rerun()
+                        # st.markdown("""
+                        #     <meta http-equiv="refresh" content="0">
+                        #         """, unsafe_allow_html=True)
          
 
 
