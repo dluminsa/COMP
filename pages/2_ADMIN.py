@@ -251,7 +251,7 @@ if st.session_state.logged_in:
             notpaid = len(notpay)
             if notpaid ==0:
                 st.markdown("<p style='color:purple';>ALL MEMBERS HAVE PAID FOR THIS MONTH</>", unsafe_allow_html=True)
-            elif nopaid ==1:
+            elif notpaid ==1:
                 st.markdown(f"<p style='color:green';>{notpaid} MEMBER HAS NOT CONTRIBUTED THIS MONTH</>", unsafe_allow_html=True)
                 with st.expander('**CLICK HERE TO SEE THEM:**'):
                         st.write(set(notpay))
