@@ -155,7 +155,7 @@ if st.session_state.logged_in:
     dfcl = dfcl.sort_values(by = ['MON'])
     dfcl['MONA'] = pd.to_numeric(dfcl['MON'], errors='coerce')
 
-    cola, colb, colc = st.columns([3,1,2])
+    cola, colb = st.columns([2,1])
     dfcl = dfcl[['MONA', 'TYPE', 'AMOUNT']].copy()
     groupd = dfcl.groupby(['MONA', 'TYPE'], as_index=False).sum()
     
@@ -176,10 +176,10 @@ if st.session_state.logged_in:
         fig.update_layout(
         xaxis=dict(title='Month', tickformat='d'),
         yaxis=dict(title='Total Amount', tickformat='d'),
-        plot_bgcolor = 'lightblue',
+        plot_bgcolor = 'lightgray',
                )
         st.plotly_chart(fig,use_container_width =True, config= config)
-    with colc:
+    with colb:
         aggregated_df = dfcl.groupby("TYPE")["AMOUNT"].sum().reset_index()
         fig = px.pie(
         aggregated_df,
