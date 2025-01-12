@@ -150,7 +150,7 @@ if st.session_state.logged_in:
             st.cache_resource.clear()
             #CHECKING MEMBERS WHO HAVEN'T PAID THIS MONTH
             dat = dt.date.today()
-            dat = str(dat)
+            dte = str(dat)
             mon = int(dat.strftime('%m'))
             dfpaye['MONTH'] = pd.to_datetime(dfpaye['MONTHEX'], errors='coerce')
             dfpaye['MON'] = dfpaye['MONTH'].dt.month
@@ -194,7 +194,7 @@ if st.session_state.logged_in:
                     'ITEM': items,
                     'AMOUNT': amounts
                             })
-                df['MONTHEX'] = dat
+                df['MONTHEX'] = dte
                 df = df[['ITEM', 'MONTHEX', 'AMOUNT']].copy()
                 dfd = df[df.duplicated(subset='ITEM')]
                 checka = df.shape[0]
@@ -238,7 +238,7 @@ if st.session_state.logged_in:
             st.cache_resource.clear()
             #CHECKING MEMBERS WHO HAVEN'T PAID THIS MONTH
             dat = dt.date.today()
-            dat = str(dat)
+            dte = str(dat)
             mon = int(dat.strftime('%m'))
             dfpay['MONTH'] = pd.to_datetime(dfpay['MONTH'], errors='coerce')
             dfpay['MON'] = dfpay['MONTH'].dt.month
@@ -288,7 +288,7 @@ if st.session_state.logged_in:
                     'DIRECTOR': names,
                     'AMOUNT': amounts
                             })
-                df['MONTH'] = dat
+                df['MONTH'] = dte
                 df = df[['DIRECTOR', 'MONTH', 'AMOUNT']].copy()
                 dfd = df[df.duplicated(subset='DIRECTOR')]
                 checka = df.shape[0]
