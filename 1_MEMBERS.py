@@ -3,6 +3,7 @@ from datetime import datetime
 from streamlit_gsheets import GSheetsConnection
 import traceback
 import streamlit as st
+import plotly.express as px
 import time
 import numpy as np
 #sdd
