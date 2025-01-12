@@ -324,6 +324,7 @@ if st.session_state.logged_in:
                     st.success('SUBMITTED SUCCESSFULLY')
                     st.cache_data.clear()
                     st.cache_resource.clear()
+                    st.rerun()
                     st.markdown("""
                         <meta http-equiv="refresh" content="0">
                             """, unsafe_allow_html=True)
