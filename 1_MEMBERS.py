@@ -62,7 +62,7 @@ else:
 time.sleep(1)
 if st.session_state.logged_in:
     conn = st.connection('gsheets', type=GSheetsConnection)
-    exist = conn.read(worksheet= 'SUP', usecols=list(range(4)),ttl=5)
+    exist = conn.read(worksheet= 'CONTRIBUTIONS', usecols=list(range(4)),ttl=5)
     dfp = exist.dropna(how='all')
     try:
         conn = st.connection('gsheets', type=GSheetsConnection)
