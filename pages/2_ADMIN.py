@@ -11,7 +11,6 @@ import datetime as dt
 from google.oauth2.service_account import Credentials
 from oauth2client.service_account import ServiceAccountCredentials
 
-
 st.set_page_config(
     'COMPETENCE YARD TRACKER'
 )
@@ -80,6 +79,43 @@ else:
         st.session_state.logged_in = False
         st.rerun()
 time.sleep(1)
+if st.session_state.logged_in:
+        # Prepare the credentials dictionary
+    credentials_info = {
+            "type": secrets["type"],
+            "project_id": secrets["project_id"],
+            "private_key_id": secrets["private_key_id"],
+            "private_key": secrets["private_key"],
+            "client_email": secrets["client_email"],
+            "client_id": secrets["client_id"],
+            "auth_uri": secrets["auth_uri"],
+            "token_uri": secrets["token_uri"],
+            "auth_provider_x509_cert_url": secrets["auth_provider_x509_cert_url"],
+            "client_x509_cert_url": secrets["client_x509_cert_url"]
+        }
+            
+    try:
+        # Define the scopes needed for your application
+        scopes = ["https://www.googleapis.com/auth/spreadsheets",
+                "https://www.googleapis.com/auth/drive"]
+        
+         
+        credentials = Credentials.from_service_account_info(credentials_info, scopes=scopes)
+            
+            # Authorize and access Google Sheets
+        client = gspread.authorize(credentials)
+            
+            # Open the Google Sheet by URL
+        spreadsheetu = "https://docs.google.com/spreadsheets/d/1IgIltX9_2yvppb4YYoebRyyYwCqYZng62h0cRYPmAdE"    
+        spreadsheet = client.open_by_url(spreadsheetu)
+    except Exception as e:
+            # Log the error message
+        st.write(f"CHECK: {e}")
+        st.write(traceback.format_exc())
+        st.write("COULDN'T CONNECT TO GOOGLE SHEET, TRY AGAIN")
+        st.stop()
+
+
 if st.session_state.logged_in:
     st.write('DOWNLOADS')
     cola, colb = st.columns(2)
@@ -184,7 +220,9 @@ if st.session_state.logged_in:
                     st.table(styled)
                     submit = st.button('**CLICK HERE TO SUBMIT**')
                     if submit:
-                        pass
+                        sheet1 = spreadsheet.worksheet("EXPENSES")
+                        rows_to_append = df.values.tolist()
+                        sheet.append_rows(rows_to_append, value_input_option='RAW')
                         time.sleep(2)
                         st.success('SUBMITTED SUCCESSFULLY')
                         st.markdown("""
@@ -272,7 +310,9 @@ if st.session_state.logged_in:
                     st.table(styled)
                     submit = st.button('**CLICK HERE TO SUBMIT**')
                     if submit:
-                        pass
+                        sheet1 = spreadsheet.worksheet("CONTRIBUTIONS")
+                        rows_to_append = df.values.tolist()
+                        sheet.append_rows(rows_to_append, value_input_option='RAW')
                         time.sleep(2)
                         st.success('SUBMITTED SUCCESSFULLY')
                         st.markdown("""
