@@ -80,9 +80,7 @@ else:
         st.session_state.logged_in = False
         st.rerun()
 if st.session_state.logged_in:
-    st.session_state.restart = True
-    
-if st.session_state.restart:    
+if not st.session_state.restart:    
     secrets = st.secrets["connections"]["gsheets"]
         # Prepare the credentials dictionary
     credentials_info = {
@@ -150,7 +148,7 @@ if st.session_state.logged_in:
     else:
         pass
         
-if st.session_state.restart:
+if not st.session_state.restart:
         st.write('LOOG')
         if todo == 'EXPENDITURE':
             st.cache_data.clear()
@@ -332,7 +330,7 @@ if st.session_state.restart:
                         st.success('SUBMITTED SUCCESSFULLY')
                         st.cache_data.clear()
                         st.cache_resource.clear()
-                        st.session_state.restart = False
+                        st.session_state.restart = True
                         st.rerun()
                         # st.markdown("""
                         #     <meta http-equiv="refresh" content="0">
