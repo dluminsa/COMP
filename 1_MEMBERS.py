@@ -205,6 +205,7 @@ if st.session_state.logged_in:
             st.plotly_chart(fig)
 
 if st.session_state.logged_in:
+    st.divider()
     st.markdown("<p style='color:red'><b><u>DOWNLOADS</u></b></p>", unsafe_allow_html=True)
     cola, colb = st.columns(2)
     with cola:
