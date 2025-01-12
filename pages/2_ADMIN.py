@@ -79,7 +79,6 @@ else:
         st.error("Unable to retrieve your information. Please log in again.")
         st.session_state.logged_in = False
         st.rerun()
-if st.session_state.logged_in:
 if not st.session_state.restart:    
     secrets = st.secrets["connections"]["gsheets"]
         # Prepare the credentials dictionary
