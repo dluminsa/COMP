@@ -149,6 +149,8 @@ if st.session_state.logged_in:
     if not todo:
         st.stop()
     else:
+        pass
+if st.session_state.restart:
         if todo == 'EXPENDITURE':
             st.cache_data.clear()
             st.cache_resource.clear()
