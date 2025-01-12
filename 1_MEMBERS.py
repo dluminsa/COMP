@@ -159,6 +159,10 @@ if st.session_state.logged_in:
     dfcl = dfcl[['MONA', 'TYPE', 'AMOUNT']].copy()
     groupd = dfcl.groupby(['MONA', 'TYPE'], as_index=False).sum()
     
+    config = {'scrollZoom': False, 
+              'displayModeBar': False,
+             }
+    
     with cola:
         st.write("**TREND OF THE GROUP'S TOTAL EXPENSES AND CONTRIBUTIONS**")
         fig = px.line(
@@ -172,9 +176,9 @@ if st.session_state.logged_in:
         fig.update_layout(
         xaxis=dict(title='Month', tickformat='d'),
         yaxis=dict(title='Total Amount', tickformat='d'),
-        template='plotly_white'
+        plot_bgcolor = 'lightblue',
                )
-        st.plotly_chart(fig)
+        st.plotly_chart(fig,use_container_width =True, config= config)
     with colc:
         aggregated_df = dfcl.groupby("TYPE")["AMOUNT"].sum().reset_index()
         fig = px.pie(
@@ -186,7 +190,8 @@ if st.session_state.logged_in:
         color="TYPE", 
         color_discrete_map={"SPENT": "red", "CONTRIBUTION": "blue"} # Optional: Makes it a donut chart
          )
-        st.plotly_chart(fig)
+
+        st.plotly_chart(fig, use_container_width =True)
     st.divider()    
         
     cola, colb, colc = st.columns([1,2,1])
@@ -199,10 +204,10 @@ if st.session_state.logged_in:
             fig.update_layout(
                 xaxis=dict(tickmode='array', tickvals=grouped['MON'], title='Month'),
                 yaxis=dict(title='Total Amount', tickformat='d'),
-                template='plotly_white'
+                plot_bgcolor = 'lightblue',
                )
 
-            st.plotly_chart(fig)
+            st.plotly_chart(fig, use_container_width =True, config= config)
 
 if st.session_state.logged_in:
     st.divider()
