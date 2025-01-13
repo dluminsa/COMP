@@ -225,7 +225,6 @@ if st.session_state.logged_in:
                     sheet1.append_rows(rows_to_append, value_input_option='RAW')
                     time.sleep(2)
                     st.success('SUBMITTED SUCCESSFULLY')
-                    st.rerun()
                     st.markdown("""
                         <meta http-equiv="refresh" content="0">
                             """, unsafe_allow_html=True)
