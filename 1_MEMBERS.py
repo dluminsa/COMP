@@ -113,7 +113,7 @@ if st.session_state.logged_in:
     col1, col2 = st.columns(2)
 
     col1.write(f'**YOU HAVE SO FAR CONTRIBUTED: {nym} TIMES**')
-    col2.write(f'**THIS IS A TOTAL OF:  {yours}**')
+    col2.write(f'**THIS IS A TOTAL OF:  {int(yours)}**')
     col1, col2 = st.columns(2)
     col1.write(f'**EXPENSES OF {spent} % HAVE BEEN MADE**')
     col2.write(f'**YOUR ACTUAL BALANCE IS HENCE:  {yourb}**')
