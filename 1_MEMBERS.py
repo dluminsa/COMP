@@ -100,8 +100,8 @@ if st.session_state.logged_in:
         st.metric(label='**BALANCE**', value=f'{bal:,.0f}')
 
     st.divider()
-    cola, colb = st.columns([1,4])
-    colb.info(f'**DEAR DR. {director_name} BELOW IS YOUR CONTRIBUTION SUMMARY**')
+    
+    st.info(f'**DEAR DR. {director_name} BELOW IS YOUR CONTRIBUTION SUMMARY**')
     dfpay = dfpa.copy()
     nym = dfpa.shape[0]
     yours = contribut
