@@ -1,9 +1,9 @@
-  import pandas as pd 
+import pandas as pd 
 from datetime import datetime
 from streamlit_gsheets import GSheetsConnection
 import traceback
 import streamlit as st
-import plo tly.express as px
+import plotly.express as px
 import time
 import numpy as np
 #sdd
