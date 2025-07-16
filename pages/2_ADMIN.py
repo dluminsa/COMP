@@ -19,7 +19,7 @@ try:
    exist = conn.read(worksheet= 'CONTRIBUTIONS', usecols=list(range(4)),ttl=5)
    dfpay = exist.dropna(how='all')
 except:
-   st.write("POOR NETWORK, COULDN'T CONNECT TO DATABASE")
+   st.markdown("*POOR NETWORK, COULDN'T CONNECT TO DATABASE*", unsafe_allow_html=True)
    st.write('REFRESH PAGE TO START AGAIN')
    st.stop()
 try:
