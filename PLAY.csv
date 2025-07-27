@@ -1,0 +1,49 @@
+StoryTitle,SectionTitle,Sentence
+PLAY WRIGHT,Chapter 1,async_ play- wright Browser
+PLAY WRIGHT,Chapter 1, Browser- Context page
+PLAY WRIGHT,Chapter 1, Locator Element- Handle Response
+PLAY WRIGHT,Chapter 1, Request launch new_ context close
+PLAY WRIGHT,Chapter 1, add_ cookies clear_ cookies
+PLAY WRIGHT,Chapter 1,goto click fill type press
+PLAY WRIGHT,Chapter 1,wait_ for_ selector screen shot
+PLAY WRIGHT,Chapter 1,query_ selector_ all title url
+PLAY WRIGHT,Chapter 1,content set_ viewport_ size
+PLAY WRIGHT,Chapter 1,click fill inner_ text is_ visible
+PLAY WRIGHT,Chapter 1,wait_ for console dialog
+PLAY WRIGHT,Chapter 1,page. set_ input_files new_ page
+PLAY WRIGHT,Chapter 1,page. expect_ download
+PLAY WRIGHT,Chapter 1,expect( locator ).to_ have_ text()
+PLAY WRIGHT,Chapter 1,tracing .start tracing .stop
+PLAY WRIGHT,Chapter 2,pip install playwright
+PLAY WRIGHT,Chapter 2,play- wright install
+PLAY WRIGHT,Chapter 2,import asyncio
+PLAY WRIGHT,Chapter 2,from play- wright .async _api 
+PLAY WRIGHT,Chapter 2,import async_ play wright
+PLAY WRIGHT,Chapter 2,async def run():
+PLAY WRIGHT,Chapter 2,async with async_ play- 
+PLAY WRIGHT,Chapter 2,wright ()as p:
+PLAY WRIGHT,Chapter 2,browser = await p. chromium 
+PLAY WRIGHT,Chapter 2,.launch (headless =False)
+PLAY WRIGHT,Chapter 2,context = await browser 
+PLAY WRIGHT,Chapter 2,.new_ conte- xt()
+PLAY WRIGHT,Chapter 2,page = await context .new_ page()
+PLAY WRIGHT,Chapter 2,await page .goto (link)
+PLAY WRIGHT,Chapter 2,await browser .close()
+PLAY WRIGHT,Chapter 2,asyncio .run( run())
+PLAY WRIGHT,Chapter 3,async with async_ play- wright 
+PLAY WRIGHT,Chapter 3, ()as p:
+PLAY WRIGHT,Chapter 3,chromium = p.chromium
+PLAY WRIGHT,Chapter 3,firefox = p.firefox
+PLAY WRIGHT,Chapter 3,webkit = p.webkit
+PLAY WRIGHT,Chapter 3,lauch await p. chromium .launch
+PLAY WRIGHT,Chapter 3,(headless =False)
+PLAY WRIGHT,Chapter 3,new_ context await browser
+PLAY WRIGHT,Chapter 3, .new_ context
+PLAY WRIGHT,Chapter 3,close await browser .close
+PLAY WRIGHT,Chapter 3,new_ page page = 
+PLAY WRIGHT,Chapter 3,await context .new_ page()
+PLAY WRIGHT,Chapter 3,add_ cookies await context 
+PLAY WRIGHT,Chapter 3, .add_ cookies
+PLAY WRIGHT,Chapter 3,clear_ cookies await context
+PLAY WRIGHT,Chapter 3,.clear_ cookies
+PLAY WRIGHT,Chapter 3,close await context.close
