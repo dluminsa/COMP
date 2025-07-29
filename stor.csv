@@ -1,0 +1,87 @@
+StoryTitle,SectionTitle,Sentence
+A TERROR IN THE DARK,Chapter 1,async_ play- wright Starts the Play- wright 
+A TERROR IN THE DARK,Chapter 1,enviro- nment for browser autom- ation
+A TERROR IN THE DARK,Chapter 1,from playwright .async_ api import async_ play wright
+A TERROR IN THE DARK,Chapter 1,async with async_ playwright() as p:
+A TERROR IN THE DARK,Chapter 1,browser = await p. chromium .launch()
+A TERROR IN THE DARK,Chapter 1,launch() Launches a browser instance (Chromium Firefox  WebKit)
+A TERROR IN THE DARK,Chapter 1,browser = await p. chromium .launch (headless = False)
+A TERROR IN THE DARK,Chapter 1,new_ context() Creates a new browser context 
+A TERROR IN THE DARK,Chapter 1, for isolated sessions
+A TERROR IN THE DARK,Chapter 1,context = await browser .new_ context()
+A TERROR IN THE DARK,Chapter 1,new_  page() Opens a new tab (page)
+A TERROR IN THE DARK,Chapter 1, within the browser context
+A TERROR IN THE DARK,Chapter 1,page = await context .new_ page()
+A TERROR IN THE DARK,Chapter 1,goto() Navigates to a specified URL
+A TERROR IN THE DARK,Chapter 1,await page. Goto (website link)
+A TERROR IN THE DARK,Chapter 1,click() Clicks on an element matching the selector
+A TERROR IN THE DARK,Chapter 1,"await page .click( ""text = Login"")"
+A TERROR IN THE DARK,Chapter 1,fill() Fills an input field with the provided text
+A TERROR IN THE DARK,Chapter 1,"await page .fill(""# username"", ""john _doe"")"
+A TERROR IN THE DARK,Chapter 1,type() Types text into an element
+A TERROR IN THE DARK,Chapter 1,simulating real keystrokes
+A TERROR IN THE DARK,Chapter 1,"await page. type(""# search"", ""playwright "")"
+A TERROR IN THE DARK,Chapter 1,press() Simulates pressing a keyboard key
+A TERROR IN THE DARK,Chapter 2,"await page. press(""# input"", ""Enter"")"
+A TERROR IN THE DARK,Chapter 2,wait _for_ selector()
+A TERROR IN THE DARK,Chapter 2,Waits for-an element matching the selector to appear.
+A TERROR IN THE DARK,Chapter 2,"await page. Wait _for_ selector (""div .alert- success "")"
+A TERROR IN THE DARK,Chapter 2,is_ visible() Checks if the element is visible on the pa
+A TERROR IN THE DARK,Chapter 2,"visible = await page .is_ visible (""text = Submit"")"
+A TERROR IN THE DARK,Chapter 2,screen- shot() Takes a screen shot of 
+A TERROR IN THE DARK,Chapter 2, the full page or a specific element
+A TERROR IN THE DARK,Chapter 2,"await page. Screen- shot (path =""pic .png"")"
+A TERROR IN THE DARK,Chapter 2,title() Gets the title of the current web page
+A TERROR IN THE DARK,Chapter 2,url Returns the current URL of the page
+A TERROR IN THE DARK,Chapter 2,print (page .url)
+A TERROR IN THE DARK,Chapter 2,content Returns the HTML content of the page
+A TERROR IN THE DARK,Chapter 2,html = await page. content()
+A TERROR IN THE DARK,Chapter 2,locator Returns a Locator object to
+A TERROR IN THE DARK,Chapter 2, perform advanced interactions
+A TERROR IN THE DARK,Chapter 2,"login_ button = page. Locator ("" button #login"")"
+A TERROR IN THE DARK,Chapter 2,await login_ button .click()
+A TERROR IN THE DARK,Chapter 2,query_ selector Selects a single 
+A TERROR IN THE DARK,Chapter 2, element that matches a selector
+A TERROR IN THE DARK,Chapter 2,"element = await page. query_ selector (""h1"")"
+A TERROR IN THE DARK,Chapter 2,print (await element .text_ content ())
+A TERROR IN THE DARK,Chapter 2,query_ selector _all() Selects all 
+A TERROR IN THE DARK,Chapter 2,elements that match the selector
+A TERROR IN THE DARK,Chapter 2,"elements = await page. query_ selector_ all(""li"")"
+A TERROR IN THE DARK,Chapter 2,for el in elements :
+A TERROR IN THE DARK,Chapter 2,print (await el. inner_ text())
+A TERROR IN THE DARK,Chapter 2,inner_ text() Gets the visible
+A TERROR IN THE DARK,Chapter 2,e text of an element
+A TERROR IN THE DARK,Chapter 2,"text = await page. inner_ text (""h1"")"
+A TERROR IN THE DARK,Chapter 2,inner_ html Gets the inner 
+A TERROR IN THE DARK,Chapter 2,HTML content of an element
+A TERROR IN THE DARK,Chapter 2,"html = await page. inner_ html (""div# container "")"
+A TERROR IN THE DARK,Chapter 2,set_ viewport _size Sets the dimension of the viewport
+A TERROR IN THE DARK,Chapter 2,"await page. set_ viewport _size({"" width"": 1280, ""height"": 720})"
+A TERROR IN THE DARK,Chapter 2,add_ cookies Adds cookies to the browser context
+A TERROR IN THE DARK,Chapter 2,await context .add_ cookies
+A TERROR IN THE DARK,Chapter 2,"([{"" name"": ""token"", ""value"": ""abc123"", ""url"": ""link"" }])"
+A TERROR IN THE DARK,Chapter 2,clear_ cookies Clears all cookies from the browser context
+A TERROR IN THE DARK,Chapter 2,await context .clear_ cookies ()
+A TERROR IN THE DARK,Chapter 3,evaluate  Executes JS in the page context
+A TERROR IN THE DARK,Chapter 3,"result = await page. Evaluate (""() => document .title"")"
+A TERROR IN THE DARK,Chapter 3,"close  Closes the page, context, or browser"
+A TERROR IN THE DARK,Chapter 3,await page. close()
+A TERROR IN THE DARK,Chapter 3,await context .close()
+A TERROR IN THE DARK,Chapter 3,await browser .close()
+A TERROR IN THE DARK,Chapter 3,route Intercepts and handles network requests
+A TERROR IN THE DARK,Chapter 3,"await page. Route (""**/*"",  lambda route: route. abort())"
+A TERROR IN THE DARK,Chapter 3,on Listens for page events like console
+A TERROR IN THE DARK,Chapter 3," request, or dialog"
+A TERROR IN THE DARK,Chapter 3,"page. on("" console"", lambda msg: print "
+A TERROR IN THE DARK,Chapter 3,"t (f"" Console :{msg. text }""))"
+A TERROR IN THE DARK,Chapter 3,expect  Asserts that a condition holds true during a test
+A TERROR IN THE DARK,Chapter 3,from play- wright .async_ api import expect
+A TERROR IN THE DARK,Chapter 3,"await expect (page. Locator (""text = Success "
+A TERROR IN THE DARK,Chapter 3,)). to_be_ visible ()
+A TERROR IN THE DARK,Chapter 3,wait_ for_  timeout Waits for a 
+A TERROR IN THE DARK,Chapter 3,specified time in milli- seconds
+A TERROR IN THE DARK,Chapter 3,await page. Wait _for_ timeout (2000)
+A TERROR IN THE DARK,Chapter 3,dialog. accept /  dialog. dismiss
+A TERROR IN THE DARK,Chapter 3,Handles JS alert/ prompt/ confirm dialogs
+A TERROR IN THE DARK,Chapter 3,"page .on("" dialog"", lambda dialog: dialog. Accept ())"
+A TERROR IN THE DARK,Chapter 3,"await page. Click (""# alert- button "")"
